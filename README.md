@@ -14,7 +14,7 @@ See the [XL Release reference manual](https://docs.xebialabs.com/xl-release) for
 
 ## Installation
 
-* Copy the latest JAR file from the [releases page](https://github.com/xebialabs-community/standard-xlr-dynamic-create-release-task-plugin/releases) into the `XL_RELEASE_SERVER/plugins/__local__` directory.
+* Copy the latest JAR file from the [releases page](https://github.com/xebialabs-community/xlr-dynamic-create-release-task-plugin/releases) into the `XL_RELEASE_SERVER/plugins/__local__` directory.
 * Restart the XL Release server.
 
 ## Features/Usage/Types/Tasks
