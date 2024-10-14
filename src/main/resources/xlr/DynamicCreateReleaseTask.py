@@ -60,7 +60,7 @@ def buildTemplateVariableList(templateVariables, templateVariableDelimiter, date
     templateVariableList = []
 
     for item in templateVariables:
-        (varKey, varType, varValue) = item.strip('"').split(templateVariableDelimiter)
+        (varKey, varType, varValue) = item.split(templateVariableDelimiter)
         if varType == "Text":
             templateVariableList.append(VariableBuilder.newStringVariable(varKey, varValue).build())
         elif varType == "Password":
