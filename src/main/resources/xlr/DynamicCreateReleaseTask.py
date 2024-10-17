@@ -8,6 +8,8 @@
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+
+import json
 import sys
 from com.xebialabs.xlrelease.builder import TaskBuilder
 from com.xebialabs.xlrelease.builder import VariableBuilder
@@ -21,35 +23,32 @@ def stringToBoolean(s):
     elif s.lower() == "false":
         return False
     else:
-        print "Invalid value for Boolean/Checkbox variable: %s.  Valid values are True, False.\n" % s
-        raise Exception
+        raise Exception("Invalid value for Boolean/Checkbox variable: %s.  Valid values are True, False.\n" % s)
 
 def stringToInteger(s):
     try:
         return int(s)
     except:
-        print "Invalid value for Number/Integer variable %s.\n" % s
-        raise Exception
+        raise Exception("Invalid value for Number/Integer variable %s.\n" % s)
 
 def stringToDate(s, simpleDateFormat):
     sdf = SimpleDateFormat(simpleDateFormat)
     try:
         return sdf.parse(s)
     except:
-        print "Invalid value for Date variable %s\n" % s
-        raise Exception
+        raise Exception("Invalid value for Date variable %s\n" % s)
 
 def stringToListString(s):
-    print "stringToListString() not implemented for %s\n" %s
-    raise Exception
+    try:
+        return [str(c) for c in json.loads(s.replace('\\"', '"'))]
+    except:
+        raise Exception("Invalid value for List of String variable %s\n" % s)
 
 def stringToMapStringString(s):
-    print "stringToMapStringString() not implemented for %s\n" %s
-    raise Exception
+    raise Exception("stringToMapStringString() not implemented for %s\n" %s)
 
 def stringToSetString(s):
-    print "stringToSetString() not implemented for %s\n" %s
-    raise Exception
+    raise Exception("stringToSetString() not implemented for %s\n" %s)
 
 def getTaskPosition(task):
     for t in task.container.tasks:
