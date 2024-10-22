@@ -45,7 +45,13 @@ def stringToListString(s):
         raise Exception("Invalid value for List of String variable %s\n" % s)
 
 def stringToMapStringString(s):
-    raise Exception("stringToMapStringString() not implemented for %s\n" %s)
+    mss = {}
+    try:
+        for k, v in json.loads(s.replace('\\"', '"')).items():
+            mss[k] = v
+        return mss
+    except:
+        raise Exception("Invalid value for Map String String variable %s" % s)
 
 def stringToSetString(s):
     raise Exception("stringToSetString() not implemented for %s\n" %s)
@@ -72,7 +78,7 @@ def buildTemplateVariableList(templateVariables, templateVariableDelimiter, date
             templateVariableList.append(VariableBuilder.newListStringVariable(varKey, stringToListString(varValue)).build())
         elif varType == "Date":
             templateVariableList.append(VariableBuilder.newDateVariable(varKey, stringToDate(varValue, dateFormat)).build())
-        elif varType == "Key-value Map":
+        elif varType == "Map":
             templateVariableList.append(VariableBuilder.newMapStringStringVariable(varKey, stringToMapStringString(varValue)).build())
         elif varType == "Set":
             templateVariableList.append(VariableBuilder.newSetStringVariable(varKey, stringToSetString(varValue)).build())
