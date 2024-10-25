@@ -101,4 +101,4 @@ tbTask = TaskBuilder.newCreateReleaseTask() \
     .withVariables(buildTemplateVariableList(templateVariables, templateVariableDelimiter, dateFormat)) \
     .build()
 
-phaseApi.addTask(currentPhase.id, tbTask, getTaskPosition(currentTask) + 1)
+phaseApi.addTask(currentTask.getContainer().id, tbTask, getTaskPosition(currentTask) + 1)
