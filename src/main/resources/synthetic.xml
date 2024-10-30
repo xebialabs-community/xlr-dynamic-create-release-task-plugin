@@ -20,6 +20,8 @@
         <property name="templateId" category="input" />
         <property name="folderId" category="input" />
         <property name="startRelease" category="input" kind="boolean" required="false" />
+        <property name="secretVariableKey" category="input" />
+        <property name="secret" category="input" password="true" />
         <property name="templateVariables" category="input" kind="list_of_string" />
         <property name="templateVariableDelimiter" category="input" hidden="true" default="|" />
         <property name="dateFormat" category="input" hidden="true" default="yyyy-MM-dd" />

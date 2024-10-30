@@ -61,8 +61,11 @@ def getTaskPosition(task):
         if t.id == task.id:
             return task.container.tasks.index(t)
 
-def buildTemplateVariableList(templateVariables, templateVariableDelimiter, dateFormat):
+def buildTemplateVariableList(templateVariables, templateVariableDelimiter, dateFormat, secretVariableKey, secret):
     templateVariableList = []
+
+    if secretVariableKey and secret:
+        templateVariableList.append(VariableBuilder.newPasswordStringVariable(secretVariableKey, secret).build())
 
     for item in templateVariables:
         (varKey, varType, varValue) = item.split(templateVariableDelimiter)
@@ -98,7 +101,7 @@ tbTask = TaskBuilder.newCreateReleaseTask() \
     .withNewReleaseTitle(newReleaseTitle) \
     .withFolderId(folderId) \
     .withStartRelease(startRelease) \
-    .withVariables(buildTemplateVariableList(templateVariables, templateVariableDelimiter, dateFormat)) \
+    .withVariables(buildTemplateVariableList(templateVariables, templateVariableDelimiter, dateFormat, secretVariableKey, secret)) \
     .build()
 
 phaseApi.addTask(currentTask.getContainer().id, tbTask, getTaskPosition(currentTask) + 1)
